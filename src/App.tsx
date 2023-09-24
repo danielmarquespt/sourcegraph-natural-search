@@ -1,35 +1,44 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import sourcegraphLogo from './assets/sourcegraph.svg'
+import codyLogo from './assets/cody.svg'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [humanQuery, setHumanQuery] = useState("")
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const handleChange = (e) => {
+        setHumanQuery(e.target.value)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert(humanQuery)
+    }
+
+    const proccessHumanQuery = () => {
+
+
+    }
+
+    return (
+        <>
+            <div>
+                <img src={codyLogo} width={80} className="logo" alt="Vite logo" />
+                <img src={sourcegraphLogo} width={80} className="logo react" alt="React logo" />
+            </div>
+            <h1>Cody for CodeSearch</h1>
+            <form onSubmit={handleSubmit}>
+                <input onChange={handleChange} className="home-input"/>
+            </form>
+            <div className="card">
+
+                <h3>human query is {humanQuery}</h3>
+
+            </div>
+            <p className="read-the-docs">
+                Click on the Vite and React logos to learn more
+            </p>
+        </>
+    )
 }
 
 export default App
