@@ -1,14 +1,12 @@
-import fs from "fs";
-import path from "path";
 import { useState } from 'react'
 import sourcegraphLogo from './assets/sourcegraph.svg'
 import codyLogo from './assets/cody.svg'
-
+import {SyncLoader} from 'react-spinners'
 
 function App() {
-    const [humanQuery, setHumanQuery] = useState("")
+    const [humanQuery, setHumanQuery] = useState("All the gitignore files Linus added in the last year to the linux repo")
     const [isProcessing, setIsProcessing] = useState(false)
-    const [finalQuery, setFinalQuery] = useState("")
+    const [finalQuery, setFinalQuery] = useState("Type your natural language query and hit enter")
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setHumanQuery(e.target.value)
@@ -17,7 +15,6 @@ function App() {
         e.preventDefault();
 
         proccessHumanQuery()
-        alert("sent!")
     }
     const proccessHumanQuery = async () => {
 
@@ -133,27 +130,24 @@ function App() {
     }
 
     return (
-        <>
+        <div className="container">
             <div>
-                <img src={codyLogo} width={80} className="logo" alt="Vite logo" />
-                <img src={sourcegraphLogo} width={80} className="logo react" alt="React logo" />
+                <img src={codyLogo} className="logo" alt="Cody logo" />
+                <img src={sourcegraphLogo} className="logo" alt="Sourcegraph logo" />
             </div>
             <h1>Cody for CodeSearch </h1>
             <form onSubmit={handleSubmit}>
-                <input onChange={handleChange} className="home-input"/>
+                <span className="label">Natural Language Query</span>
+                <input onChange={handleChange} className={isProcessing ? "home-input disabled" : "home-input"} value={humanQuery}/>
             </form>
             <div className="card">
-                <div className="finall-query">
-                    <pre>{finalQuery? finalQuery:"no query yet"}</pre>
+                <span className="label">Sourcegraph Syntax</span>
+                <div className="final-query">
+                    <a href={"https://sourcegraph.com/search?q="+ encodeURIComponent(finalQuery)} target="_blank"><pre>{isProcessing ? <SyncLoader size="6"  speedMultiplier="0.6" color="#FF5543"/> : finalQuery}</pre></a>
                 </div>
 
-                <p>isProcessing? {isProcessing.toString()}</p>
             </div>
-
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+        </div>
     )
 }
 
