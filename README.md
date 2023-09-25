@@ -47,8 +47,8 @@ Things like `fork:` or `case:` or `file:hasOwner()` are not yet covered.
 #### Does not handle advanced regex for content
 Right now, the content of a file is almost always just a keyword. No advanced matching via regex is ever generated
 
-### Is falky identifiying paths
-When a path for something or folder is mentioned in the natural lang query, it somethines adds it to the repo name
+### Is flaky identifying paths
+When a path for something or folder is mentioned in the natural lang query, it sometimes adds it to the repo name
 
 ### Has limited knowledge about dependencies between keywords
 If a language is mentioned with the diff keyword, its going to output syntax with both, which is not ideal. It does however understand that for `author:` a `type:commit` or `type:diff` is needed
