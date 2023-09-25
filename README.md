@@ -70,18 +70,17 @@ To run front-end:
 
 ```
 yarn 
-
 yarn dev
 ```
 
-to run server:
+to build the server after changes:
 ```
 cd server
-
-node server.js
-```
-
-To compile server changes
-```
 npm run build
+```
+
+to run the server:
+```
+cd server
+node server.js
 ```
