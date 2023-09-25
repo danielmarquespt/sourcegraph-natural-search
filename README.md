@@ -4,7 +4,7 @@
 # Sourcegraph Natural Search
 This is an experimental project that translates natural language queries to Sourcegraph syntax. Made this as a way of expanding my React and javascript skills
 
-Uses [typechat]("https://github.com/microsoft/TypeChat") to generate a valid json out of the LLM. In this case it uses the default typechat implementation to its restricted to OpenAI models or Azure.
+Uses **[Typechat](https://github.com/microsoft/TypeChat)** to generate a valid json out of the LLM. In this case it uses the default typechat implementation to its restricted to OpenAI models or Azure.
 
 ---
 ### Features:
@@ -34,6 +34,16 @@ returns
 
 `author:"Linus" after:"2 years ago" type:diff repo:^github\.com/torvalds/linux$ content:"task_struct"`
 
+**Handles multiple human languages**
+
+For example, portuguese:
+
+`todos os diffs com task_struct feitos pelo Linus no repositório Linux nos últimos 2 anos`
+
+returns
+
+`author:"Linus" after:"2 years ago" type:diff repo:^github\.com/torvalds/linux$ task_struct`
+
 ---
 
 ### Known Limitations
@@ -44,8 +54,8 @@ For example, mentioning "changes" not always results in "type:diff". Very rarely
 #### Does not cover the whole syntax
 Things like `fork:` or `case:` or `file:hasOwner()` are not yet covered.
 
-#### Does not handle advanced regex for content
-Right now, the content of a file is almost always just a keyword. No advanced matching via regex is ever generated
+#### Hallucinates some less known git repos 
+Like mentioning "sourcegraph cody repo" is intreperted as "sourcegraph/sourcegraph-cody" which does not exist. Mentioning the full path is recommended. 
 
 ### Is flaky identifying paths
 When a path for something or folder is mentioned in the natural lang query, it sometimes adds it to the repo name
@@ -54,20 +64,17 @@ When a path for something or folder is mentioned in the natural lang query, it s
 If a language is mentioned with the diff keyword, its going to output syntax with both, which is not ideal. It does however understand that for `author:` a `type:commit` or `type:diff` is needed
 
 
-
 ---
 
 ### How to run
 
 needs a .env file on server folder with:
-
 ```
 OPENAI_MODEL="gpt-4"
 OPENAI_API_KEY="sk-YOUR-TOKEN"
 ```
 
 To run front-end:
-
 ```
 yarn 
 yarn dev
