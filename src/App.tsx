@@ -95,7 +95,9 @@ function App() {
             }
 
             if (basicQuery.includeContent) {
-                queryStringParts.push(`content:"${basicQuery.includeContent}"`);
+                queryStringParts.push(basicQuery.includeContent);
+                queryStringParts.push(`patterntype:regexp`);
+                //queryStringParts.push(`content:"${basicQuery.includeContent}"`);
             }
 
             if (basicQuery.excludeContent) {
@@ -143,7 +145,7 @@ function App() {
             <div className="card">
                 <span className="label">Sourcegraph Syntax</span>
                 <div className="final-query">
-                    <a href={"https://sourcegraph.com/search?q="+ encodeURIComponent(finalQuery)} target="_blank"><pre>{isProcessing ? <SyncLoader size="6"  speedMultiplier="0.6" color="#FF5543"/> : finalQuery}</pre></a>
+                    <a href={"https://sourcegraph.com/search?q="+ encodeURIComponent(finalQuery)} target="_blank"><pre>{isProcessing ? <SyncLoader size="5"  speedMultiplier="0.6" color="#FF5543"/> : finalQuery}</pre></a>
                 </div>
 
             </div>

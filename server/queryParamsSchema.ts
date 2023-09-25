@@ -11,6 +11,7 @@ export interface BaseBasicQuery {
     // react repo => ^github\.com/facebook/react$
     // vue => ^github\.com/vuejs/vue$
     // linux => ^github\.com/torvalds/linux$
+    // gitlab => ^gitlab\.com/gitlab-org/gitlab$
     includeRepos?: RegExpPattern[];
     excludeRepos?: RegExpPattern[];
     revisions?: Revision[];

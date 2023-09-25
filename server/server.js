@@ -27,6 +27,7 @@ dotenv_1.default.config();
 const model = (0, typechat_1.createLanguageModel)(process.env);
 const schema = fs_1.default.readFileSync(path_1.default.join(__dirname, "queryParamsSchema.ts"), "utf8");
 const translator = (0, typechat_1.createJsonTranslator)(model, schema, "QueryParams");
+console.log(translator);
 app.post("/api/query-request", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { newMessage } = req.body;
     console.log(newMessage);

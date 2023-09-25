@@ -18,6 +18,8 @@ const model = createLanguageModel(process.env);
 const schema = fs.readFileSync(path.join(__dirname, "queryParamsSchema.ts"), "utf8");
 const translator = createJsonTranslator<QueryParams>(model, schema, "QueryParams");
 
+console.log(translator);
+
 app.post("/api/query-request", async (req, res) => {
     const { newMessage } = req.body;
     console.log(newMessage);

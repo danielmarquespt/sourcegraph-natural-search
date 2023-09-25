@@ -122,10 +122,16 @@ body {
 
 }
 
+.final-query a {
+  width: 100%;
+}
+
 pre {
+  width: 100%;
   margin:0;
   vertical-align: middle;
   font-weight: bold;
+  overflow:auto;
 }
 
 .container {
