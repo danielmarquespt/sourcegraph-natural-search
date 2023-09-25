@@ -59,6 +59,13 @@ If a language is mentioned with the diff keyword, its going to output syntax wit
 
 ### How to run
 
+needs a .env file on server folder with:
+
+```
+OPENAI_MODEL="gpt-4"
+OPENAI_API_KEY="sk-YOUR-TOKEN"
+```
+
 To run front-end:
 
 ```
