@@ -24,9 +24,10 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 dotenv_1.default.config();
+const schemaToUse = ["queryParamsSchema.ts", "batchChangesSchema.ts"];
 const model = (0, typechat_1.createLanguageModel)(process.env);
-const schema = fs_1.default.readFileSync(path_1.default.join(__dirname, "queryParamsSchema.ts"), "utf8");
-const translator = (0, typechat_1.createJsonTranslator)(model, schema, "QueryParams");
+const schema = fs_1.default.readFileSync(path_1.default.join(__dirname, schemaToUse[1]), "utf8");
+const translator = (0, typechat_1.createJsonTranslator)(model, schema, "BatchSpec");
 console.log(translator);
 app.post("/api/query-request", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { newMessage } = req.body;

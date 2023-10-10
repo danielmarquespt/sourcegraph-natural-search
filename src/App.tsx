@@ -8,6 +8,7 @@ function App() {
     const [isProcessing, setIsProcessing] = useState(false)
     const [finalQuery, setFinalQuery] = useState("Type your natural language query and hit enter")
 
+
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setHumanQuery(e.target.value)
     }

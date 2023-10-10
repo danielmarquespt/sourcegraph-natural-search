@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import { createLanguageModel, createJsonTranslator, processRequests, Result } from "typechat";
 import { QueryParams } from "./queryParamsSchema.js";
+import {BatchSpec} from "./batchChangesSchema";
 import dotenv from "dotenv";
 
 const app: Express = express();
@@ -14,9 +15,12 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
+const schemaToUse = ["queryParamsSchema.ts", "batchChangesSchema.ts"];
+
+
 const model = createLanguageModel(process.env);
-const schema = fs.readFileSync(path.join(__dirname, "queryParamsSchema.ts"), "utf8");
-const translator = createJsonTranslator<QueryParams>(model, schema, "QueryParams");
+const schema = fs.readFileSync(path.join(__dirname, schemaToUse[1]), "utf8");
+const translator = createJsonTranslator<BatchSpec>(model, schema, "BatchSpec");
 
 console.log(translator);
 
@@ -31,7 +35,7 @@ app.post("/api/query-request", async (req, res) => {
     }
 
     // query TypeChat to translate this into an intent
-    const response: Result<QueryParams> = await translator.translate(newMessage as string);
+    const response: Result<BatchSpec> = await translator.translate(newMessage as string);
 
     if (!response.success) {
         console.log(response.message);
@@ -40,13 +44,14 @@ app.post("/api/query-request", async (req, res) => {
     }
 
     await processQuery(response.data);
+    res.json({success: true});
 
     res.json({
         items: response.data
     });
 });
 
-const processQuery = async (cart: QueryParams) => {
+const processQuery = async (cart: BatchSpec) => {
     // Outputs the resulting query
     console.log(JSON.stringify(cart, undefined, 2));
 };
